@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
+import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
+import Layout from "@/components/layout";
+import { FixedPlugin } from "@/components/fixed-plugin";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "700", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,12 +22,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+    return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <head>
+        <script
+          defer
+          data-site="YOUR_DOMAIN_HERE"
+          src="https://api.nepcha.com/js/nepcha-analytics.js"
+        ></script>
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+      </head>
+      <body className={roboto.className}>
+        <Layout>
+          {children}
+          <FixedPlugin />
+        </Layout>
       </body>
     </html>
   );
